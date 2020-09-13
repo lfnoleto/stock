@@ -14,9 +14,10 @@ target 'Qrestoque' do
 
   pod 'RNSmtpMailer', :path => '../node_modules/react-native-smtp-mailer'
 
-  pod 'react-native-smtp', :path => '../node_modules/react-native-smtp'
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'react-native-smtp', :path => '../node_modules/react-native-smtp'
 
   target 'QrestoqueTests' do
     inherit! :complete

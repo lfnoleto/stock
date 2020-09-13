@@ -9,7 +9,7 @@ import Input from './Input';
 import { Scope } from '@unform/core';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
-
+import EmailSender from 'react-native-smtp';
 
 
 
@@ -33,8 +33,45 @@ const  Home = ()=>{
 
 	useEffect(() => {
 		Data()
+		
 	  })
-	  
+	 
+	const email = (codigoSap,descr) =>{
+		 
+		// Configuration
+		EmailSender.config({
+			host: 'smtp.office365.com',
+			port: '587', // Optional. Default to 465
+			
+			isAuth: 'true', // Optional. Default to `true`
+			tls: 'true' // Optional. Default to `true`
+		});
+		
+		/*
+		* Used react-native-fs module to get file path.
+		* Keep this array empty if there is no attachment.
+		*/
+		const attachments = [
+			//RNFS.ExternalStorageDirectoryPath + '/Tracklist/file.txt',
+			//RNFS.ExternalStorageDirectoryPath + '/Tracklist/file_2.txt',
+		];
+		
+		// Now send the mail
+		EmailSender.send(
+			{
+				from: 'bot.mail@jallesmachado.com',
+				to: 'lucasnoleto18@gmail.com',
+				subject: 'BAIXA DE MATERIAL',
+				body: `<h3>[${1}]-[${codigoSap}]-[${descr}]-[${10000020303}]</h3>`
+			},
+			attachments, // This second parameter is mandatory. You can send an empty array.
+		);
+
+
+
+	} 
+
+
   	return(
 	
     	<Wrapper>
@@ -57,7 +94,7 @@ const  Home = ()=>{
 							<Input name="desc" label="Descrição:" />		
 							<Input name="sap" label="Código SAP:" autoCorrect={false}autoCapitalize="none"keyboardType="number-pad"/>
 							<Input name="qdt" label="Quantidade:" keyboardType="number-pad" />
-							<TouchableOpacity style={styles.submitButton} onPress={() => formRef.current.submitForm()}>
+							<TouchableOpacity style={styles.submitButton} onPress={() => email(codigo,descricao)}>
 								<Text style={styles.submitButtonText}>Enviar</Text>
 							</TouchableOpacity>
 						</Form>
