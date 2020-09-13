@@ -22,6 +22,7 @@
     "linear-gradient": "^1.0.6",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-alert-pro": "^1.1.2",
     "react-native-barcode-mask": "^1.2.4",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-native-elements": "^2.3.0",

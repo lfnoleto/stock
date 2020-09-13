@@ -1,6 +1,6 @@
 'use strict';
 import React, { useRef,useState,useEffect}from 'react';
-import { View,Text,KeyboardAvoidingView, Button,Image,StyleSheet,TouchableOpacity,StatusBar } from 'react-native';
+import { View,Text,KeyboardAvoidingView, Button,Image,StyleSheet,TouchableOpacity,StatusBar, Alert } from 'react-native';
 import {Wrapper,Header,Conteiner,BalanceContainer,BalanceTitle,Balance,} from './styled'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Qrcode from '../../Components/Qrcode/index'
@@ -10,7 +10,7 @@ import { Scope } from '@unform/core';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import EmailSender from 'react-native-smtp';
-
+import AlertPro from "react-native-alert-pro";
 
 
 
@@ -31,41 +31,41 @@ const  Home = ()=>{
 	}
 
 
-	useEffect(() => {
-		Data()
-		
-	  })
+	useEffect(() => {Data()})
 	 
 	const email = (codigoSap,descr) =>{
-		 
-		// Configuration
-		EmailSender.config({
-			host: 'smtp.office365.com',
-			port: '587', // Optional. Default to 465
+
+		const alertPlay = (Titulo,Messagem) => Alert.alert(
+			`${Titulo}`,
+			`${Messagem}`,
+			[ {text: "Cancel",onPress: () => console.log("Cancel Pressed"),style: "cancel"},{ text: "OK", onPress: () => console.log("OK Pressed") }],
+			{ cancelable: false }
+		  );
+
+		EmailSender.config({host: 'smtp.office365.com',port: '587', username: '',password: '',isAuth: 'true',tls: 'true' });
+		const attachments = [];
+		try{
+			EmailSender.send({from: '',to: '',subject: '[BAIXA DE MATERIAL]',
+					body: `
+							<p> Nome do Solicitante: [${1}] </p>
+							<p> Quantidade: [${1}] </p>
+							<p> Codigo: [${codigoSap}] <p>
+							<p> Desc: [${descr}]  </p>
+							<p> Centro de Custo: [${10000020303}]</p>
+						`
+				},attachments,);
+			const title = 'Sucesso'
+			const messagem = 'Sua solicitação de Baixa foi Enviada com Sucesso!'
+			alertPlay(title,messagem)
+
+		}catch(error){
+
+			const title = 'Error'
+			const messagem = `Error ao enviar sua solicitação ${error}`
+			alertPlay(title,messagem)
 			
-			isAuth: 'true', // Optional. Default to `true`
-			tls: 'true' // Optional. Default to `true`
-		});
+		}
 		
-		/*
-		* Used react-native-fs module to get file path.
-		* Keep this array empty if there is no attachment.
-		*/
-		const attachments = [
-			//RNFS.ExternalStorageDirectoryPath + '/Tracklist/file.txt',
-			//RNFS.ExternalStorageDirectoryPath + '/Tracklist/file_2.txt',
-		];
-		
-		// Now send the mail
-		EmailSender.send(
-			{
-				from: 'bot.mail@jallesmachado.com',
-				to: 'lucasnoleto18@gmail.com',
-				subject: 'BAIXA DE MATERIAL',
-				body: `<h3>[${1}]-[${codigoSap}]-[${descr}]-[${10000020303}]</h3>`
-			},
-			attachments, // This second parameter is mandatory. You can send an empty array.
-		);
 
 
 
