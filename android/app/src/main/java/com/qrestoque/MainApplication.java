@@ -4,6 +4,15 @@ import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.auth.react.AzureAuthPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import io.realm.react.RealmReactPackage;
+import io.realm.react.RealmReactPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.reactnativesmtp.SmtpPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -16,7 +25,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
+import com.airbnb.android.react.lottie.LottiePackage;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -32,7 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
-      
+          packages.add(new LottiePackage());
           
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());

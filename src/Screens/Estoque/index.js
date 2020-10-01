@@ -6,10 +6,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput,RadioButton,Button,HelperText } from 'react-native-paper';
-import {email} from '../../Components/email/email'
+import {email} from './email'
+
 import {styles} from './styles'
 
-const  Home = ({data})=>{
+const  Home = ()=>{
 	const formRef = useRef();
 	const navigation = useNavigation();
 	const [codigo,setCodigo] = useState()
@@ -19,7 +20,6 @@ const  Home = ({data})=>{
 	const [custo,SetCentroCusto] = useState()
 	const [value, setValue] = React.useState('first');
 	useEffect(() => {Data()})
-	useEffect(() => {user()})
 	const onChangeSolicitante = text => setSolicitante(text);
 	const onChangeQuantidade = text => setQdt(text);
 	const onChangecusto = text => SetCentroCusto(text);
@@ -51,11 +51,6 @@ const  Home = ({data})=>{
 		
 	};
 
-	const user = async ()=>{
-		const valor = await AsyncStorage.getItem('user')
-		setSolicitante(valor)
-	
-	}
 
 
 	const Data = async ()=>{
@@ -72,11 +67,12 @@ const  Home = ({data})=>{
 			email(codigo,descricao,solicitante,Quantidade,custo,value)
 			setCodigo('')
         	setDescricao('')
+        	setSolicitante('')
         	setQdt('')
 			SetCentroCusto('')
 		}else{
 			Alert.alert(
-				'Error',
+				'Erro',
 				'Todos os campos é de preenchimento obrigatório',
 				[ {text: "Cancel",onPress: () => console.log("Cancel Pressed"),style: "cancel"},{ text: "OK", onPress: () => console.log("OK Pressed") }],
 				{ cancelable: false }

@@ -8,7 +8,7 @@ export const Wrapper = styled.SafeAreaView`
 export const Conteiner = styled.ScrollView``;
 
 export const Header = styled.View`
-  height:50px;
+    height:50px;
   padding:0 16px;
   flex-direction:row;
   align-items:center;
@@ -31,14 +31,5 @@ export const Balance = styled.Text`
   font-weight:bold;
 
 `;
-export const Image = styled.View`
 
-
-  text-align:center;
-  flex:1;
-
-`;
-export const Img = styled.Image`
-  
-
-`;
+export const Img = styled.Image``;

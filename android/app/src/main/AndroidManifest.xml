@@ -10,8 +10,8 @@
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
+      android:icon="@drawable/icon"
+      android:roundIcon="@drawable/icon" 
       android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity
@@ -24,6 +24,14 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data
+              android:pathPrefix="/${applicationId}/android/callback"
+              android:scheme="${applicationId}" />
+      </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>

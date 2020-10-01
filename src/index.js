@@ -5,6 +5,7 @@
  * @format
  * @flow strict-local
  */
+
 import React from 'react';
 import {Image} from 'react-native';
 import Router from './Router'
@@ -13,18 +14,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import img from  '../src/Image/Logotipo.png'
 import screens from '../src/Screens/Notfications/index'
+import cadastro from '../src/Router'
+import Qrcodesolicitacao from '../src/Components/QrcodeCadastro/index'
+import solicitacao from '../src/Screens/Cadastro/index'
+import auth from '../src/auth/SignInScreen'
+
+
 
 const Stack = createStackNavigator();
-//source={img}
+
 function App() {
   return (
     <NavigationContainer>
-      	<Stack.Navigator initialRouteName="Home">
+      	<Stack.Navigator initialRouteName="auth">
         	<Stack.Screen name="Estoque" component={Router} 
             	options={{
                 
                 	headerTitle: (props) => (
-                    	<Image style={{ width: 300, height: 70 , alignSelf:'center'}}  resizeMode='contain'/>
+                    	<Image style={{ width: 300, height: 70 , alignSelf:'center'}}  source={img} resizeMode='contain'/>
                 	),
                 	headerTintColor: '#fff',
                 	headerTitleStyle: {
@@ -39,7 +46,46 @@ function App() {
       	<Stack.Screen name="Details" component={Qrcode} 
 			options={{
           		headerTitle: (props) => ( 
-                    <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}}  resizeMode='contain'/>
+                    <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}} source={img}  resizeMode='contain'/>
+                ),
+				headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
+				
+            }}
+		/>
+
+		<Stack.Screen name="Compra" component={cadastro} 
+			options={{
+          		headerTitle: (props) => ( 
+                    <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}} source={img}  resizeMode='contain'/>
+                ),
+				headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
+				
+            }}
+		/>
+			<Stack.Screen name="qrcodes" component={Qrcode} 
+			options={{
+          		headerTitle: (props) => ( 
+                    <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}} source={img}  resizeMode='contain'/>
+                ),
+				headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
+				
+            }}
+		/>
+
+		<Stack.Screen name="Solicitacao" component={solicitacao} 
+			options={{
+          		headerTitle: (props) => ( 
+                    <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}} source={img}  resizeMode='contain'/>
+                ),
+				headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
+				
+            }}
+		/>
+
+		<Stack.Screen name="auth" component={auth} 
+			options={{
+          		headerTitle: (props) => ( 
+                    <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}} source={img}  resizeMode='contain'/>
                 ),
 				headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
 				
@@ -49,7 +95,7 @@ function App() {
     </NavigationContainer>
   );
 }
-//source={img}
+
 export default App;
 
 

@@ -1,81 +1,64 @@
-import React,{Component} from 'react'
-import {View,StyleSheet,TextInput,TouchableOpacity,Text} from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage';
+import * as React from 'react';
+import { Surface, Text,  } from 'react-native-paper';
+import { StyleSheet,ScrollView,SafeAreaView,TouchableOpacity,View } from 'react-native';
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
+import { useNavigation } from '@react-navigation/core';
 
 
-export default class App extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      textInputdate : '',
-      getValue:'',
-    }
-  }
+const MyComponent = () => {
 
-  saveValueFunction =()=>{
-    if(this.state.textInputdate){
-      AsyncStorage.setItem('key_default', this.state.textInputdate)
-      this.setState({textInputdate:''})
-      alert('dados salvo')
-    }else{
-      alert('salva valor')
-    } 
-  }
+	const navigation = useNavigation()
 
 
-  getValueFunction =()=>{
-    AsyncStorage.getItem('key_default').then(
-      value => this.setState({getValue: value})
-    )
-  }
-  render(){
-    return(
-      <View style={styles.container}>
-        <TextInput 
-          style={styles.textinputStyle}
-          placeholder='Digite aqui'
-          value={this.state.textInputdate}
-          onChangeText={data => this.setState({textInputdate: data}) 
-          
-          
-          }/>
 
-        <TextInput 
-          style={styles.textinputStyle}
-          placeholder='Digite aqui'
-          value={this.state.textInputdate}
-          onChangeText={data => this.setState({textInputdate: data}) 
-          
-          
-          }/>
-
-          <TouchableOpacity onPress={this.saveValueFunction}>
-            <Text>enviar salvo</Text>
-          </TouchableOpacity>
-
-          
-          <TouchableOpacity onPress={this.getValueFunction}>
-            <Text>Ler salvo</Text>
-          </TouchableOpacity>
-          <Text>
-            {this.state.getValue}
-          </Text>
-      </View>
-    )
-  }
+		return(
+			<SafeAreaView style={styles.Contenter}>
+				<ScrollView >
+					<TouchableOpacity onPress={() => navigation.navigate('Compra')}>
+						<Surface style={styles.surface}>
+							<View style={styles.card}>
+								<Text style={styles.card1}>Solicitação de compra</Text>
+								<View style={styles.card1}>
+									<EvilIcons name='arrow-right'size={45} color='#242e7c' />
+								</View>
+							</View>
+						</Surface>
+					</TouchableOpacity>	
+				</ScrollView>
+		</SafeAreaView>
+	);
 }
+
+export default MyComponent;
 
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
+	card:{
+		flexDirection:'row'
+	},
+	card1:{
+		alignItems: 'center',
+		justifyContent: 'center',
+		margin:50,
+		fontSize:15,
+
+	},
+	
+  surface: {
+    padding: 8,
+    height: 100,
+    width: 350,
+    alignItems: 'center',
+    justifyContent: 'center',
+	elevation: 4,
+	margin:10,
+	
   },
-  textinputStyle:{
-    textAlign:'center',
-    width:'100%',
-    borderColor:'blue',
-    borderWidth:1,
-  }
-})
+  Contenter:{
+	  flex:1,
+	  justifyContent:'center',
+	  alignItems: 'center',
+
+  },
+  
+});

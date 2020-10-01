@@ -17,9 +17,9 @@ const Details = ()=>{
 
 		if(e != null){
 			
-			AsyncStorage.setItem('key_default',e.data)
+			AsyncStorage.setItem('compra',e.data)
 			
-			navigation.navigate('Home',{data: 'Potato '})	
+			navigation.navigate('Solicitacao',{data: 'Potato '})
 
 		}else{
 		  	alert('Está com error local Store')			
@@ -27,7 +27,7 @@ const Details = ()=>{
 	}
 
 	const getValueFunction =()=>{
-		AsyncStorage.getItem('key_default').then(
+		AsyncStorage.getItem('compra').then(
 		  value => this.setState({getValue: value})
 		)
 	}

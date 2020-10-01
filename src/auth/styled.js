@@ -4,13 +4,13 @@ import styled from 'styled-components/native';
 export const Wrapper = styled.SafeAreaView`
   background:#F8F9F9;
   flex:1;
+  align-items:center;
+  justify-content:center;
 `;
 export const Conteiner = styled.ScrollView``;
 
 export const Header = styled.View`
-  height:50px;
-  padding:0 16px;
-  flex-direction:row;
+  flex:1;
   align-items:center;
   
 `;
@@ -31,14 +31,5 @@ export const Balance = styled.Text`
   font-weight:bold;
 
 `;
-export const Image = styled.View`
 
-
-  text-align:center;
-  flex:1;
-
-`;
-export const Img = styled.Image`
-  
-
-`;
+export const Img = styled.Image``;

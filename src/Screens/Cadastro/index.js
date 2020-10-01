@@ -9,7 +9,7 @@ import { TextInput,RadioButton,Button,HelperText } from 'react-native-paper';
 import {email} from '../../Components/email/email'
 import {styles} from './styles'
 
-const  Home = ({data})=>{
+const  Home = ()=>{
 	const formRef = useRef();
 	const navigation = useNavigation();
 	const [codigo,setCodigo] = useState()
@@ -19,7 +19,6 @@ const  Home = ({data})=>{
 	const [custo,SetCentroCusto] = useState()
 	const [value, setValue] = React.useState('first');
 	useEffect(() => {Data()})
-	useEffect(() => {user()})
 	const onChangeSolicitante = text => setSolicitante(text);
 	const onChangeQuantidade = text => setQdt(text);
 	const onChangecusto = text => SetCentroCusto(text);
@@ -51,15 +50,10 @@ const  Home = ({data})=>{
 		
 	};
 
-	const user = async ()=>{
-		const valor = await AsyncStorage.getItem('user')
-		setSolicitante(valor)
-	
-	}
 
 
 	const Data = async ()=>{
-		const valor = await (await AsyncStorage.getItem('key_default')).split('@')
+		const valor = await (await AsyncStorage.getItem('compra')).split('@')
 		const codigos = valor[0]
 		const descri =valor[1]
 		setCodigo(codigos)
@@ -72,11 +66,12 @@ const  Home = ({data})=>{
 			email(codigo,descricao,solicitante,Quantidade,custo,value)
 			setCodigo('')
         	setDescricao('')
+        	setSolicitante('')
         	setQdt('')
 			SetCentroCusto('')
 		}else{
 			Alert.alert(
-				'Error',
+				'Erro',
 				'Todos os campos é de preenchimento obrigatório',
 				[ {text: "Cancel",onPress: () => console.log("Cancel Pressed"),style: "cancel"},{ text: "OK", onPress: () => console.log("OK Pressed") }],
 				{ cancelable: false }
@@ -94,9 +89,7 @@ const  Home = ({data})=>{
      		<Conteiner>
 	  			<StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true}/>
         		<Header>
-					<TouchableOpacity onPress={() => navigation.navigate('Details')} style={{marginTop:10}}>
-						<MaterialCommunityIcons name='qrcode-scan'size={35} color='#242e7c'/>
-					</TouchableOpacity>        
+					     
        			</Header>
 		
 
@@ -178,10 +171,7 @@ const  Home = ({data})=>{
 						</View>
 						
 
-						<RadioButton.Group onValueChange={value => setValue(value)} value={value} >
-							<RadioButton.Item label="1000 - Jalles Machado" value="1000" />
-							<RadioButton.Item label="1001 - Otávio Lage" value="1001" />
-						</RadioButton.Group>
+						
 						<Button style={styles.submitButton} icon="email" mode="contained" onPress={() => enviar()}>
 							Enviar Solicitação
 						</Button>

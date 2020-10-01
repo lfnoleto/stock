@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import teste from './Screens/index'
 import Qrcode from '../src/Components/Qrcode/index'
 import Notifications from './Screens/Notfications/index'
+import SignInScreen from '../src/auth/SignInScreen'
   const Tab = createBottomTabNavigator();
 
   const icons = {
@@ -56,7 +57,7 @@ import Notifications from './Screens/Notfications/index'
       
       >
           <Tab.Screen name="Home" component={HomeScreens} options={{title:'Baixa'}} />
-          <Tab.Screen name="Qrcode" component={Qrcode}  options={{title:'Estoque'}} />     
+          <Tab.Screen name="Qrcode" component={SignInScreen}  options={{title:'Estoque'}} />     
           <Tab.Screen name="Notifications" component={Notifications}  options={{title:'Cadastro'}} />
           <Tab.Screen name="Settings" component={teste}  options={{title:'Ajustes'}} />
         </Tab.Navigator>
