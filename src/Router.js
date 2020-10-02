@@ -6,7 +6,7 @@ import HomeScreens from './Screens/Home/index'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import teste from './Screens/index'
-import Qrcode from '../src/Components/Qrcode/index'
+import config from '../src/Screens/config/index'
 import Notifications from './Screens/Notfications/index'
 import SignInScreen from '../src/auth/SignInScreen'
   const Tab = createBottomTabNavigator();
@@ -59,7 +59,7 @@ import SignInScreen from '../src/auth/SignInScreen'
           <Tab.Screen name="Home" component={HomeScreens} options={{title:'Baixa'}} />
           <Tab.Screen name="Qrcode" component={SignInScreen}  options={{title:'Estoque'}} />     
           <Tab.Screen name="Notifications" component={Notifications}  options={{title:'Cadastro'}} />
-          <Tab.Screen name="Settings" component={teste}  options={{title:'Ajustes'}} />
+          <Tab.Screen name="Settings" component={config}  options={{title:'Ajustes'}} />
         </Tab.Navigator>
         
     )

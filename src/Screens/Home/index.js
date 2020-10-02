@@ -17,9 +17,15 @@ const  Home = ({data})=>{
 	const [solicitante,setSolicitante] = useState('')
 	const [Quantidade,setQdt] = useState()
 	const [custo,SetCentroCusto] = useState()
+	
+	const  [emaill,setEmail] = useState()
+	const  [senha,setSenha] = useState()
+	const  [emailCc,setEmailCc] = useState()	
+
+
 	const [value, setValue] = React.useState('first');
 	useEffect(() => {Data()})
-	useEffect(() => {user()})
+	useEffect(() => {config()})
 	const onChangeSolicitante = text => setSolicitante(text);
 	const onChangeQuantidade = text => setQdt(text);
 	const onChangecusto = text => SetCentroCusto(text);
@@ -27,7 +33,7 @@ const  Home = ({data})=>{
 	const onChangecodigo = text => setCodigo(text);
 
 	const SolicitanteErrors = () => {
-		return !solicitante.includes(' ');
+		return !solicitante != '';
 		
 	};
 	
@@ -56,25 +62,46 @@ const  Home = ({data})=>{
 		setSolicitante(valor)
 	
 	}
-
+	
 
 	const Data = async ()=>{
-		const valor = await (await AsyncStorage.getItem('key_default')).split('@')
+		const valor = await (await AsyncStorage.getItem('key_default')).split('@')		
 		const codigos = valor[0]
 		const descri =valor[1]
 		setCodigo(codigos)
 		setDescricao(descri)
+		
+		
 	}
+
+
+	const config = async ()=>{
+	
+		const emails  = await AsyncStorage.getItem('email')
+		const senhas   = await AsyncStorage.getItem('senha')
+		const emailCcs =  await AsyncStorage.getItem('emailCC')
+		setEmail(emails)
+		setSenha(senhas)
+		setEmailCc(emailCcs)
+
+	}
+
+
+
 
 	const enviar =()=>{
 
+
 		if(solicitante!=''&&codigo!=''&&descricao!=''&&Quantidade!=''&&custo!=''){
-			email(codigo,descricao,solicitante,Quantidade,custo,value)
+
+			email(codigo,descricao,solicitante,Quantidade,custo,value,emaill,senha,emailCc)
 			setCodigo('')
         	setDescricao('')
         	setQdt('')
 			SetCentroCusto('')
+
 		}else{
+
 			Alert.alert(
 				'Error',
 				'Todos os campos é de preenchimento obrigatório',

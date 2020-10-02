@@ -18,7 +18,8 @@ import cadastro from '../src/Router'
 import Qrcodesolicitacao from '../src/Components/QrcodeCadastro/index'
 import solicitacao from '../src/Screens/Cadastro/index'
 import auth from '../src/auth/SignInScreen'
-
+import Usuario from '../src/Screens/ScreensCadastro/index'
+import Usuarios from '../src/Screens/ScreensCadastro/cadastroList'
 
 
 const Stack = createStackNavigator();
@@ -26,7 +27,7 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      	<Stack.Navigator initialRouteName="auth">
+      	<Stack.Navigator initialRouteName="Compra">
         	<Stack.Screen name="Estoque" component={Router} 
             	options={{
                 
@@ -82,7 +83,7 @@ function App() {
             }}
 		/>
 
-		<Stack.Screen name="auth" component={auth} 
+		<Stack.Screen name="usuarios" component={Usuarios} 
 			options={{
           		headerTitle: (props) => ( 
                     <Image style={{ width: 300, height: 80 , alignSelf:'center',flex:1, paddingEnd:400}} source={img}  resizeMode='contain'/>
@@ -91,6 +92,8 @@ function App() {
 				
             }}
 		/>
+
+		
       	</Stack.Navigator>
     </NavigationContainer>
   );

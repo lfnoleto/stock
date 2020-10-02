@@ -1,6 +1,6 @@
 
 'use strict';
-import React from 'react';
+import React,{useState} from 'react';
 import {Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import EmailSender from 'react-native-smtp';
@@ -16,37 +16,35 @@ const alertPlay = (Titulo,Messagem) => Alert.alert(
 );
 
 
+
+
 const deleteDate = async () => {
     try {
       await AsyncStorage.removeItem('key_default');
     } catch (error) {
-      // Error retrieving data
-      //console.log(error.message);
+   
     }
 }
 
-export const email = (codigo,descricao,solicitante,Quantidade,custo,value) =>
-{
 
-		
+
+ export const email = (codigo,descricao,solicitante,Quantidade,custo,value,emaill,senha,emailCc) =>
+{
+    
     const title = 'Sucesso'
     const messagem = 'Sua solicitação de Baixa foi Enviada com Sucesso!'
-    EmailSender.config({host: 'smtp.office365.com',port: '587', username: 'baixadematerial.ti@jallesmachado.com',password: 'Dur81284',isAuth: 'true',tls: 'true' });
+    EmailSender.config({host: 'smtp.office365.com',port: '587', username:`${emaill}`,password:`${senha}`,isAuth: 'true',tls: 'true' });
     const attachments = [];
-    console.log(html(solicitante,Quantidade,codigo,descricao,custo))
-    //eduarda.peixoto@jallesmachado.com,suporte@jallesmachado.com
-    try{
-        EmailSender.send({from: '',subject: `[BAIXA DE MATERIAL R018-${value}]`,
-                body: html(solicitante,Quantidade,codigo,descricao,custo)
-                
-            },attachments,);
-            
-            
-
-        
-        alertPlay(title,messagem)
     
-        deleteDate()
+    try{
+        EmailSender.send({from: 'baixadematerial.ti@jallesmachado.com',to: `${emailCc},suporte@jallesmachado.com`,subject: `[BAIXA DE MATERIAL ${value}]`,
+            body: html(solicitante,Quantidade,codigo,descricao,custo)
+                
+        },attachments,);
+            
+        alertPlay(title,emaill)
+    
+        deleteDate()       
 
     }catch(error){
 
@@ -54,7 +52,8 @@ export const email = (codigo,descricao,solicitante,Quantidade,custo,value) =>
         const messagem = `Error ao enviar sua solicitação ${error}`
         alertPlay(title,messagem)
         
+        
     }
 
     
-	} 
+} 
